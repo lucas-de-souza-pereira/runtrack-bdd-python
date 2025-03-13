@@ -13,18 +13,14 @@ mydb = mysql.connector.connect(
 
 if mydb.is_connected():
     db_info = mydb.get_server_info()
-    print(f"✅ connecté à SQL : {db_info}")
-
+    print(f"connecté à {db_info}")
 
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT * FROM etudiant")
+    cursor.execute("SELECT nom,capacite FROM salle")
 
     resultats = cursor.fetchall()
-
     print(resultats)
 
     cursor.close()
-    mydb.close()
-
 mydb.close()

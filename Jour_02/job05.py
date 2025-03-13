@@ -1,5 +1,5 @@
-import mysql.connector
 import os
+import mysql.connector
 from dotenv import load_dotenv
 
 load_dotenv("../.env")
@@ -13,18 +13,15 @@ mydb = mysql.connector.connect(
 
 if mydb.is_connected():
     db_info = mydb.get_server_info()
-    print(f"✅ connecté à SQL : {db_info}")
-
+    print(f"serveur info {db_info}")
 
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT * FROM etudiant")
+    cursor.execute("SELECT SUM(superficie) FROM etage")
 
-    resultats = cursor.fetchall()
+    superficie = cursor.fetchone()
 
-    print(resultats)
+    print(f"la superficie de la plateforme est de : {superficie[0]} m²")
 
     cursor.close()
-    mydb.close()
-
 mydb.close()
